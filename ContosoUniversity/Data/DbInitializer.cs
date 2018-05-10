@@ -8,7 +8,8 @@ namespace ContosoUniversity.Data
     {
         public static void Initialize(SchoolContext context)
         {
-            context.Database.EnsureCreated();
+            /* WE ARE USING MIGRATIONS SO WE CANNOT USE EnsureCreated */
+            //context.Database.EnsureCreated();
 
             // Look for any students.
             if (context.Students.Any())
