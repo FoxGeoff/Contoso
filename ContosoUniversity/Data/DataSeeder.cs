@@ -1,21 +1,25 @@
 ﻿using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
 namespace ContosoUniversity.Data
 {
-    public static class DbInitializer
+    public class DataSeeder
     {
-        public static void Initialize(SchoolContext context)
-        {
-            /* WE ARE USING MIGRATIONS SO WE CANNOT USE EnsureCreated */
-            //context.Database.EnsureCreated();
+        private readonly SchoolContext _context;
+        private readonly IHostingEnvironment _hosting;
 
-            // Look for any students.
-            if (context.Students.Any())
-            {
-                return;   // DB has been seeded
-            }
+        public DataSeeder(SchoolContext context, IHostingEnvironment hosting)
+        {
+            _context = context;
+            _hosting = hosting;
+        }
+
+        public void Seed()
+        {
+            if (_context.Students.Any()) { return; } // DB has been seeded
 
             var students = new Student[]
             {
@@ -30,9 +34,9 @@ namespace ContosoUniversity.Data
             };
             foreach (Student s in students)
             {
-                context.Students.Add(s);
+                _context.Students.Add(s);
             }
-            context.SaveChanges();
+            _context.SaveChanges();
 
             var courses = new Course[]
             {
@@ -46,9 +50,9 @@ namespace ContosoUniversity.Data
             };
             foreach (Course c in courses)
             {
-                context.Courses.Add(c);
+                _context.Courses.Add(c);
             }
-            context.SaveChanges();
+            _context.SaveChanges();
 
             var enrollments = new Enrollment[]
             {
@@ -67,9 +71,9 @@ namespace ContosoUniversity.Data
             };
             foreach (Enrollment e in enrollments)
             {
-                context.Enrollments.Add(e);
+                _context.Enrollments.Add(e);
             }
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

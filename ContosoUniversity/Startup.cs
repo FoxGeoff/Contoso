@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace ContosoUniversity
 {
@@ -23,6 +24,8 @@ namespace ContosoUniversity
             services.AddDbContext<SchoolContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<DataSeeder>();
+
             services.AddMvc();
         }
 
@@ -40,6 +43,25 @@ namespace ContosoUniversity
             }
 
             app.UseStaticFiles();
+
+            //create seed data
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                if (!env.IsDevelopment()) { return; }
+
+                var logger = loggerFactory.CreateLogger("SampleData");
+
+                try
+                {
+                    var seederManager = serviceScope.ServiceProvider.GetRequiredService<DataSeeder>();
+                    seederManager.Seed();
+                    logger.LogInformation($"==> Seed data has been added to the development database");
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "==> An error occurred while seeding the database.");
+                }
+            }
 
             app.UseMvc(routes =>
             {
