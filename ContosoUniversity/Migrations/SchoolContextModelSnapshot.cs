@@ -18,8 +18,8 @@ namespace ContosoUniversity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("ContosoUniversity.Models.Course", b =>
                 {
@@ -31,7 +31,7 @@ namespace ContosoUniversity.Migrations
 
                     b.HasKey("CourseID");
 
-                    b.ToTable("Course");
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
@@ -51,7 +51,7 @@ namespace ContosoUniversity.Migrations
 
                     b.HasIndex("StudentID");
 
-                    b.ToTable("Enrollment");
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
@@ -61,13 +61,15 @@ namespace ContosoUniversity.Migrations
 
                     b.Property<DateTime>("EnrollmentDate");
 
-                    b.Property<string>("FirstMidName");
+                    b.Property<string>("FirstMidName")
+                        .HasColumnName("first_mid_name")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("LastName");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Student");
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Models.Enrollment", b =>
