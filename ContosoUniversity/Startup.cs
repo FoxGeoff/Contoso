@@ -22,7 +22,7 @@ namespace ContosoUniversity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SchoolContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        options.UseMySql(Configuration.GetConnectionString("MySqlConnection")));
 
             services.AddTransient<DataSeeder>();
 
