@@ -12,9 +12,10 @@ using System;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20180515010746_ModStudentDataDb")]
+    partial class ModStudentDataDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,12 +60,6 @@ namespace ContosoUniversity.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTimeOffset?>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("created_at")
-                        .HasColumnType("timestamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP()");
-
                     b.Property<DateTime>("EnrollmentDate")
                         .HasColumnName("enrollment_date")
                         .HasColumnType("date");
@@ -74,12 +69,6 @@ namespace ContosoUniversity.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("LastName");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("updated_at")
-                        .HasColumnType("timestamp")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP()");
 
                     b.HasKey("ID");
 
