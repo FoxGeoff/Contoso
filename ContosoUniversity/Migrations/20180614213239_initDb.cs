@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ContosoUniversity.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class initDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,15 +26,17 @@ namespace ContosoUniversity.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    id = table.Column<int>(type: "int(10)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EnrollmentDate = table.Column<DateTime>(nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP()"),
+                    enrollment_date = table.Column<DateTime>(type: "date", nullable: false),
                     first_mid_name = table.Column<string>(type: "varchar(50)", nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Students", x => x.ID);
+                    table.PrimaryKey("PK_Students", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +62,7 @@ namespace ContosoUniversity.Migrations
                         name: "FK_Enrollments_Students_StudentID",
                         column: x => x.StudentID,
                         principalTable: "Students",
-                        principalColumn: "ID",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

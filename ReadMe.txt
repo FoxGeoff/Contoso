@@ -4,7 +4,7 @@ Work Log 5/9/2018
 Refining data types in a MySql database
 ***************************************
 
-1) A C# string maps to longtext in the database
+1) A C# string maps to longtext in the database by default
 ************************************************
 
 Using decorator:

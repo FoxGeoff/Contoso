@@ -6,8 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180510233702_InitialDb.cs" />
-    <Compile Remove="Migrations\20180515003740_DropStudendTableDb.cs" />
+    <Compile Remove="Migrations\20180615215234_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180615215546_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180615220301_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616011801_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616015710_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616020819_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616222748_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616225821_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616230451_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616231806_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616234837_CustomerDb.cs" />
+    <Compile Remove="Migrations\20180616235614_CustomerDb.cs" />
   </ItemGroup>
 
   <ItemGroup>

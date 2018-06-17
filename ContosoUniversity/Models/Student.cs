@@ -6,6 +6,7 @@ namespace ContosoUniversity.Models
 {
     public class Student
     {
+        [Column("id", TypeName = "int(10)")]
         public int ID { get; set; }
         public string LastName { get; set; }
         [Column("first_mid_name", TypeName = "varchar(50)")]

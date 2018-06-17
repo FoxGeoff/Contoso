@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace ContosoUniversity.Data
 {
@@ -19,6 +20,18 @@ namespace ContosoUniversity.Data
 
         public void Seed()
         {
+            if (_context.Customers.Any()) { return; } // DB has been seeded
+
+            var customers = new Customer[]
+            {
+            new Customer{Username="Geoff", DateAdded=DateTime.Parse("2005-09-01"), Password =Encoding.ASCII.GetBytes("password1"), IsNotExportedContact= false, IsRegisteredToC4= true}
+              };
+            foreach (Customer c in customers)
+            {
+                _context.Customers.Add(c);
+            }
+            _context.SaveChanges();
+
             if (_context.Students.Any()) { return; } // DB has been seeded
 
             var students = new Student[]
@@ -73,6 +86,9 @@ namespace ContosoUniversity.Data
             {
                 _context.Enrollments.Add(e);
             }
+
+
+
             _context.SaveChanges();
         }
     }
